@@ -42,9 +42,10 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #075da8;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin: 0.5em 0;
 }
 button:hover {
   border-color: #646cff;
@@ -52,6 +53,9 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+button.wa {
+  background-color: #07a872;
 }
 
 @media (prefers-color-scheme: light) {

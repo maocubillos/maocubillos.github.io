@@ -11,30 +11,43 @@ function App() {
         </a>
       </div> */}
       <header>
-        <h1>SOS kiddo</h1>
+        <h3>SOS kiddo</h3>
       </header>
-      {/* <nav>
-            <ul>
-                <li>
-                    <a href="/">Home</a>
-                </li>
-            </ul>
-        </nav> */}
       <div className="container">
-        <h2>Tomás Mateo Cubillos Barragán</h2>
+        <h1>Tomás Mateo Cubillos Barragán</h1>
       </div>
       <div className="card">
-        <a
+        {/* <a
           href="https://wa.me/573017711429"
           target="_blank"
           rel="noopener noreferrer"
         >
           Call Dad (+57) 3017711429
-        </a>
+        </a> */}
+        <button onClick={() => (window.location.href = "tel:+573005631664")}>
+          Call Mom (+57) 300 563 1664
+        </button>
         <br />
+        <button
+          className="wa"
+          onClick={() =>
+            window.open(
+              "https://wa.me/573005631664",
+              "_blank",
+              "noopener,noreferrer"
+            )
+          }
+        >
+          Call Mom Whatsapp
+        </button>
       </div>
       <div className="card">
+        <button onClick={() => (window.location.href = "tel:+573017711429")}>
+          Call Dad (+57) 301 7711 429
+        </button>
+        <br />
         <button
+          className="wa"
           onClick={() =>
             window.open(
               "https://wa.me/573017711429",
@@ -43,7 +56,7 @@ function App() {
             )
           }
         >
-          Call Dad (+57) 3017711429
+          Call Dad Whatsapp
         </button>
       </div>
     </>
