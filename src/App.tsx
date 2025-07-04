@@ -1,6 +1,7 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import "./App.css";
+import { PhoneOutcomeSolid, WhatsappSolid, SendMailSolid } from "iconoir-react";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       </div>
       <div className="card">
         <button onClick={() => (window.location.href = "tel:+573005631664")}>
-          Call Mom (+57) 300 563 1664
+          <PhoneOutcomeSolid width="1.5rem" /> Call Mom (+57) 300 563 1664
         </button>
         <br />
         <button
@@ -33,22 +34,22 @@ function App() {
             )
           }
         >
-          Call Mom Whatsapp
+          <WhatsappSolid width="1.5rem" /> Call Mom Whatsapp
         </button>
         <br />
         <button
           className="secondary"
           onClick={() =>
             (window.location.href =
-              "mailto:mayita8523@gmail.com?subject=SOS%20from%20Tomas")
+              "mailto:mayita8523@gmail.com?subject=SOS%20Tomas")
           }
         >
-          Send an Email to Mom mayita8523@gmail.com
+          <SendMailSolid width="1rem" /> Email Mom mayita8523@gmail.com
         </button>
       </div>
       <div className="card">
         <button onClick={() => (window.location.href = "tel:+573017711429")}>
-          Call Dad (+57) 301 7711 429
+          <PhoneOutcomeSolid width="1.5rem" /> Call Dad (+57) 301 7711 429
         </button>
         <br />
         <button
@@ -61,17 +62,18 @@ function App() {
             )
           }
         >
-          Call Dad Whatsapp
+          <WhatsappSolid width="1.5rem" /> Call Dad Whatsapp
         </button>
         <br />
         <button
           className="secondary"
           onClick={() =>
             (window.location.href =
-              "mailto:mao.cubillos@gmail.com?subject=SOS%20from%20Tomas")
+              "mailto:mao.cubillos@gmail.com?subject=SOS%20Tomas")
           }
         >
-          Send an Email to Dad mao.cubillos@gmail.com
+          <SendMailSolid width="1rem" />
+          Email Dad mao.cubillos@gmail.com
         </button>
       </div>
     </>
