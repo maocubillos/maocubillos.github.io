@@ -1,18 +1,18 @@
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import "./App.css";
-import { PhoneOutcomeSolid, WhatsappSolid, SendMailSolid } from "iconoir-react";
+import {
+  PhoneOutcomeSolid,
+  WhatsappSolid,
+  SendMailSolid,
+  MessageAlertSolid,
+} from "iconoir-react";
 
 function App() {
   return (
     <>
-      {/* <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-      </div> */}
       <header>
-        <h3>SOS</h3>
+        <h3>
+          SOS <MessageAlertSolid width="2rem" color="#e53935" />
+        </h3>
       </header>
       <div className="container">
         <h1>
