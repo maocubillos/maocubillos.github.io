@@ -35,9 +35,13 @@ function App() {
         >
           Call Mom Whatsapp
         </button>
+        <br />
         <button
           className="secondary"
-          onClick={() => (window.location.href = "mailto:mayita8523@gmail.com")}
+          onClick={() =>
+            (window.location.href =
+              "mailto:mayita8523@gmail.com?subject=SOS%20from%20Tomas")
+          }
         >
           Send an Email to Mom mayita8523@gmail.com
         </button>
@@ -59,10 +63,12 @@ function App() {
         >
           Call Dad Whatsapp
         </button>
+        <br />
         <button
           className="secondary"
           onClick={() =>
-            (window.location.href = "mailto:mao.cubillos@gmail.com ")
+            (window.location.href =
+              "mailto:mao.cubillos@gmail.com?subject=SOS%20from%20Tomas")
           }
         >
           Send an Email to Dad mao.cubillos@gmail.com
