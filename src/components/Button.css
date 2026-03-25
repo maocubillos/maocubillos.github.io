@@ -1,0 +1,44 @@
+.btn {
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  font-family: inherit;
+  font-size: 1em;
+  font-weight: 400;
+  gap: 0.5rem;
+  padding: 0.6em 1.2em;
+  text-decoration: none;
+  transition: border-color 0.25s;
+}
+
+.btn:hover {
+  border-color: var(--color-accent);
+}
+
+.btn:focus,
+.btn:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.btn-primary {
+  background-color: var(--color-btn-primary);
+  color: var(--color-btn-text);
+}
+
+.btn-secondary {
+  background-color: var(--color-btn-secondary);
+  color: var(--color-btn-text);
+}
+
+.btn-tertiary {
+  background-color: var(--color-btn-tertiary);
+  color: var(--color-btn-text);
+  font-size: 0.75rem;
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+}

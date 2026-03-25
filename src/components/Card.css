@@ -1,0 +1,12 @@
+.card {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color-card-bg);
+  border-radius: 0.3rem;
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  outline: 2px dotted var(--color-card-border);
+  padding: 1em 0.5rem;
+}

@@ -6,7 +6,13 @@ import {
   SendMailSolid,
   MessageAlertSolid,
   WarningTriangleSolid,
+  SunLight,
+  HalfMoon,
 } from "iconoir-react";
+import { Button } from "./components/Button";
+import { Card } from "./components/Card";
+import { colors } from "./styles/tokens";
+import { useTheme } from "./hooks/useTheme";
 
 interface Contact {
   label: string;
@@ -22,6 +28,7 @@ interface Profile {
 function App() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -41,12 +48,15 @@ function App() {
       <>
         <header>
           <h3>
-            SOS <MessageAlertSolid width="2rem" color="#e53935" />
+            SOS <MessageAlertSolid width="2rem" color={colors.danger} />
           </h3>
+          <button className="theme-toggle" onClick={toggle} aria-label="Toggle theme">
+            {theme === "dark" ? <SunLight width="1.25rem" /> : <HalfMoon width="1.25rem" />}
+          </button>
         </header>
         <div className="container">
           <div className="not-found">
-            <WarningTriangleSolid width="3rem" color="#e53935" />
+            <WarningTriangleSolid width="3rem" color={colors.danger} />
             <h2>Profile not found</h2>
             <p>The requested profile does not exist.</p>
           </div>
@@ -61,48 +71,41 @@ function App() {
     <>
       <header>
         <h3>
-          SOS <MessageAlertSolid width="2rem" color="#e53935" />
+          SOS <MessageAlertSolid width="2rem" color={colors.danger} />
         </h3>
+        <button className="theme-toggle" onClick={toggle} aria-label="Toggle theme">
+          {theme === "dark" ? <SunLight width="1.25rem" /> : <HalfMoon width="1.25rem" />}
+        </button>
       </header>
       <div className="container">
         <h1>{profile.name}</h1>
       </div>
       {profile.contacts.map((contact) => (
-        <div className="card" key={contact.label}>
-          <button
-            onClick={() => (window.location.href = `tel:${contact.phone}`)}
+        <Card key={contact.label}>
+          <Button
+            variant="primary"
+            leadIcon={<PhoneOutcomeSolid width="1.5rem" />}
+            href={`tel:${contact.phone}`}
           >
-            <PhoneOutcomeSolid width="1.5rem" /> Call {contact.label}{" "}
-            {contact.phone}
-          </button>
-          <br />
-          <button
-            className="wa"
-            onClick={() =>
-              window.open(
-                `https://wa.me/${contact.phone.replace(/\D/g, "")}`,
-                "_blank",
-                "noopener,noreferrer"
-              )
-            }
+            Call {contact.label} {contact.phone}
+          </Button>
+          <Button
+            variant="secondary"
+            leadIcon={<WhatsappSolid width="1.5rem" />}
+            href={`https://wa.me/${contact.phone.replace(/\D/g, "")}`}
           >
-            <WhatsappSolid width="1.5rem" /> Call {contact.label} Whatsapp
-          </button>
+            Call {contact.label} Whatsapp
+          </Button>
           {contact.email && (
-            <>
-              <br />
-              <button
-                className="secondary"
-                onClick={() =>
-                  (window.location.href = `mailto:${contact.email}?subject=SOS%20${encodeURIComponent(profile.name.split(" ")[0])}`)
-                }
-              >
-                <SendMailSolid width="1rem" /> Email {contact.label}{" "}
-                {contact.email}
-              </button>
-            </>
+            <Button
+              variant="tertiary"
+              leadIcon={<SendMailSolid width="1rem" />}
+              href={`mailto:${contact.email}?subject=SOS%20${encodeURIComponent(profile.name.split(" ")[0])}`}
+            >
+              Email {contact.label} {contact.email}
+            </Button>
           )}
-        </div>
+        </Card>
       ))}
     </>
   );
