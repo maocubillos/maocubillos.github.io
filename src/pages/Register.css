@@ -1,0 +1,100 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-align: left;
+}
+
+.field label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.field input {
+  background-color: var(--color-card-bg);
+  border-radius: 6px;
+  border: 1px solid var(--color-card-border);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  padding: 0.55em 0.8em;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field input:focus {
+  border-color: var(--color-accent);
+}
+
+.field input::placeholder {
+  opacity: 0.35;
+}
+
+.field-error {
+  color: var(--color-danger);
+  font-size: 0.78rem;
+}
+
+.optional {
+  font-size: 0.75rem;
+  opacity: 0.45;
+  margin-left: 0.25rem;
+}
+
+.contacts-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contacts-section h4 {
+  margin: 0;
+  text-align: left;
+  opacity: 0.7;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-row {
+  background-color: var(--color-card-bg);
+  border-radius: 0.4rem;
+  border: 1px solid var(--color-card-border);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.85rem;
+}
+
+.contact-row-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.remove-contact {
+  background: none;
+  border: none;
+  color: var(--color-danger);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  opacity: 0.6;
+  padding: 0.25rem;
+  transition: opacity 0.2s;
+}
+
+.remove-contact:hover {
+  opacity: 1;
+}

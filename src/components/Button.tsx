@@ -8,6 +8,7 @@ interface ButtonProps {
   trailIcon?: React.ReactNode;
   onClick?: () => void;
   href?: string;
+  type?: "button" | "submit" | "reset";
   children: React.ReactNode;
 }
 
@@ -17,6 +18,7 @@ export function Button({
   trailIcon,
   onClick,
   href,
+  type = "button",
   children,
 }: ButtonProps) {
   const className = `btn btn-${variant}`;
@@ -32,7 +34,7 @@ export function Button({
   }
 
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} type={type} onClick={onClick}>
       {leadIcon && <span className="btn-icon">{leadIcon}</span>}
       {children}
       {trailIcon && <span className="btn-icon">{trailIcon}</span>}
