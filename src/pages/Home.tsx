@@ -10,6 +10,7 @@ import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { colors } from "../styles/tokens";
 import type { Profile } from "../types/profile";
+import { supabase } from "../lib/supabase";
 
 export function Home() {
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -17,15 +18,20 @@ export function Home() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const profileName = params.get("profile") ?? "tomas";
+    const slug = params.get("profile") ?? "tomas";
 
-    fetch(`/profiles/${profileName}.json`)
-      .then((res) => {
-        if (!res.ok) throw new Error(`Profile "${profileName}" not found`);
-        return res.json() as Promise<Profile>;
-      })
-      .then(setProfile)
-      .catch((err: Error) => setError(err.message));
+    supabase
+      .from("profiles")
+      .select("name, contacts(label, phone, email)")
+      .eq("slug", slug)
+      .single()
+      .then(({ data, error }) => {
+        if (error || !data) {
+          setError(`Profile "${slug}" not found`);
+        } else {
+          setProfile(data as Profile);
+        }
+      });
   }, []);
 
   if (error) {

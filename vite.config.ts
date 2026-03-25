@@ -8,6 +8,14 @@ export default defineConfig({
   // This correctly builds to the 'docs' folder for GitHub Pages
   build: {
     outDir: "docs",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          supabase: ["@supabase/supabase-js"],
+          vendor: ["react", "react-dom", "react-router-dom"],
+        },
+      },
+    },
   },
 });
 

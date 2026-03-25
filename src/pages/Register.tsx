@@ -1,11 +1,33 @@
+import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Trash } from "iconoir-react";
 import { profileSchema, type Profile } from "../types/profile";
 import { Button } from "../components/Button";
+import { supabase } from "../lib/supabase";
 import "./Register.css";
 
+type SubmitState = "idle" | "loading" | "success" | "error";
+
+function toSlug(name: string) {
+  return name.toLowerCase().trim().replace(/\s+/g, "-");
+}
+
+function downloadJson(data: Profile) {
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${toSlug(data.name)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export function Register() {
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const {
     register,
     control,
@@ -24,15 +46,36 @@ export function Register() {
     name: "contacts",
   });
 
-  function onSubmit(data: Profile) {
-    const json = JSON.stringify(data, null, 2);
-    const blob = new Blob([json], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${data.name.toLowerCase().replace(/\s+/g, "-")}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+  async function onSubmit(data: Profile) {
+    setSubmitState("loading");
+    setSubmitError(null);
+
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .insert({ name: data.name, slug: toSlug(data.name) })
+      .select("id")
+      .single();
+
+    if (profileError || !profile) {
+      setSubmitState("error");
+      setSubmitError(profileError?.message ?? "Failed to save profile.");
+      return;
+    }
+
+    const { error: contactsError } = await supabase
+      .from("contacts")
+      .insert(
+        data.contacts.map((c) => ({ ...c, profile_id: profile.id }))
+      );
+
+    if (contactsError) {
+      setSubmitState("error");
+      setSubmitError(contactsError.message);
+      return;
+    }
+
+    setSubmitState("success");
+    downloadJson(data);
   }
 
   return (
@@ -114,9 +157,17 @@ export function Register() {
           </Button>
         </div>
 
-        <Button type="submit" variant="primary">
-          Download profile JSON
-        </Button>
+        <div className="form-actions">
+          <Button type="submit" variant="primary" disabled={submitState === "loading"}>
+            {submitState === "loading" ? "Saving…" : "Save profile"}
+          </Button>
+          {submitState === "success" && (
+            <p className="form-success">Profile saved — JSON downloaded.</p>
+          )}
+          {submitState === "error" && (
+            <p className="field-error">{submitError}</p>
+          )}
+        </div>
       </form>
     </>
   );

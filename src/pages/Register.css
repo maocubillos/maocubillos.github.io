@@ -98,3 +98,16 @@
 .remove-contact:hover {
   opacity: 1;
 }
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.form-success {
+  color: var(--color-btn-secondary);
+  font-size: 0.85rem;
+  margin: 0;
+}
