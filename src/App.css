@@ -5,12 +5,6 @@
   text-align: center;
 }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .theme-toggle {
   background-color: var(--color-toggle-bg);
   border: none;
@@ -21,7 +15,11 @@ header {
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
   transition: background-color 0.2s;
+  z-index: 100;
 }
 
 .theme-toggle:hover {

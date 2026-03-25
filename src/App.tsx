@@ -11,6 +11,7 @@ import {
 } from "iconoir-react";
 import { Button } from "./components/Button";
 import { Card } from "./components/Card";
+import { Footer } from "./components/Footer";
 import { colors } from "./styles/tokens";
 import { useTheme } from "./hooks/useTheme";
 
@@ -43,16 +44,20 @@ function App() {
       .catch((err: Error) => setError(err.message));
   }, []);
 
+  const themeToggle = (
+    <button className="theme-toggle" onClick={toggle} aria-label="Toggle theme">
+      {theme === "dark" ? <SunLight width="1.25rem" /> : <HalfMoon width="1.25rem" />}
+    </button>
+  );
+
   if (error) {
     return (
       <>
+        {themeToggle}
         <header>
           <h3>
             SOS <MessageAlertSolid width="2rem" color={colors.danger} />
           </h3>
-          <button className="theme-toggle" onClick={toggle} aria-label="Toggle theme">
-            {theme === "dark" ? <SunLight width="1.25rem" /> : <HalfMoon width="1.25rem" />}
-          </button>
         </header>
         <div className="container">
           <div className="not-found">
@@ -61,6 +66,7 @@ function App() {
             <p>The requested profile does not exist.</p>
           </div>
         </div>
+        <Footer />
       </>
     );
   }
@@ -69,13 +75,11 @@ function App() {
 
   return (
     <>
+      {themeToggle}
       <header>
         <h3>
           SOS <MessageAlertSolid width="2rem" color={colors.danger} />
         </h3>
-        <button className="theme-toggle" onClick={toggle} aria-label="Toggle theme">
-          {theme === "dark" ? <SunLight width="1.25rem" /> : <HalfMoon width="1.25rem" />}
-        </button>
       </header>
       <div className="container">
         <h1>{profile.name}</h1>
@@ -107,6 +111,7 @@ function App() {
           )}
         </Card>
       ))}
+      <Footer />
     </>
   );
 }
