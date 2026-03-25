@@ -10,11 +10,19 @@
   gap: 0.5rem;
   padding: 0.6em 1.2em;
   text-decoration: none;
-  transition: border-color 0.25s;
+  transition: border-color 0.2s, filter 0.2s, transform 0.2s;
 }
 
 .btn:hover {
   border-color: var(--color-accent);
+  color: var(--color-btn-text);
+  filter: brightness(1.18);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  filter: brightness(0.95);
+  transform: translateY(0);
 }
 
 .btn:focus,
