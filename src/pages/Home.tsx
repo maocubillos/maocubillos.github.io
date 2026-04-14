@@ -15,6 +15,7 @@ import { supabase } from "../lib/supabase";
 export function Home() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -31,8 +32,24 @@ export function Home() {
         } else {
           setProfile(data as Profile);
         }
+        setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return (
+      <>
+        <header>
+          <h3>
+            SOS <MessageAlertSolid width="2rem" color={colors.danger} />
+          </h3>
+        </header>
+        <div className="container">
+          <div className="loading-spinner" />
+        </div>
+      </>
+    );
+  }
 
   if (error) {
     return (
@@ -52,8 +69,6 @@ export function Home() {
       </>
     );
   }
-
-  if (!profile) return null;
 
   return (
     <>
